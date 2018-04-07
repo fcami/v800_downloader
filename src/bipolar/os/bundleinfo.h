@@ -17,27 +17,30 @@
     along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __PROTOBUF_FIXNUM_H__
-#define __PROTOBUF_FIXNUM_H__
+#ifndef __BUNDLE_VERSION_INFO_H__
+#define __BUNDLE_VERSION_INFO_H__
 
-#include <QByteArray>
-#include <QIODevice>
-#include <QVariant>
+#include "abstractversioninfo.h"
 
-namespace ProtoBuf {
+#ifdef Q_OS_MAC // BundleInfo is a Mac-only class.
 
-template<typename Type>
-QVariant parseFixedNumber(QByteArray &data);
+class BundleInfo : public AbstractVersionInfo {
 
-template<typename Type>
-QVariant parseFixedNumber(QIODevice &data);
+public:
+    BundleInfo(const QString &fileName = QString());
+    virtual ~BundleInfo();
 
-template<typename Type>
-QVariantList parseFixedNumbers(QByteArray &data, int maxItems = -1);
+    virtual bool isValid() const;
 
-template<typename Type>
-QVariantList parseFixedNumbers(QIODevice &data, int maxItems = -1);
+    virtual QString fileInfo(const QString &name) const;
 
-}
+    virtual QList<quint16> fileVersion() const;
 
-#endif // __PROTOBUF_VARINT_H__
+protected:
+    bool valid;
+
+};
+
+#endif // Q_OS_MAC
+
+#endif // __BUNDLE_VERSION_INFO_H__

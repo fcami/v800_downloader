@@ -17,27 +17,23 @@
     along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __PROTOBUF_FIXNUM_H__
-#define __PROTOBUF_FIXNUM_H__
+#ifndef __FLOWSYNC_HOOK_H__
+#define __FLOWSYNC_HOOK_H__
 
-#include <QByteArray>
-#include <QIODevice>
-#include <QVariant>
+#include <QDir>
 
-namespace ProtoBuf {
+class FlowSyncHook {
 
-template<typename Type>
-QVariant parseFixedNumber(QByteArray &data);
+public:
 
-template<typename Type>
-QVariant parseFixedNumber(QIODevice &data);
+    static QDir flowSyncDir(bool *found = NULL);
 
-template<typename Type>
-QVariantList parseFixedNumbers(QByteArray &data, int maxItems = -1);
+    static QDir installableHookDir();
 
-template<typename Type>
-QVariantList parseFixedNumbers(QIODevice &data, int maxItems = -1);
+    static bool install(const QDir &fromDir, QDir toDir);
 
-}
+    static int getVersion(const QDir &dir);
 
-#endif // __PROTOBUF_VARINT_H__
+};
+
+#endif // __FLOWSYNC_HOOK_H__

@@ -17,27 +17,23 @@
     along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __PROTOBUF_FIXNUM_H__
-#define __PROTOBUF_FIXNUM_H__
+#include "abstractversioninfo.h"
 
-#include <QByteArray>
-#include <QIODevice>
-#include <QVariant>
-
-namespace ProtoBuf {
-
-template<typename Type>
-QVariant parseFixedNumber(QByteArray &data);
-
-template<typename Type>
-QVariant parseFixedNumber(QIODevice &data);
-
-template<typename Type>
-QVariantList parseFixedNumbers(QByteArray &data, int maxItems = -1);
-
-template<typename Type>
-QVariantList parseFixedNumbers(QIODevice &data, int maxItems = -1);
-
+QString AbstractVersionInfo::fileVersionString(const QChar &sep) const
+{
+    return fileVersionStrings().join(sep);
 }
 
-#endif // __PROTOBUF_VARINT_H__
+QString AbstractVersionInfo::fileVersionString(const QString &sep) const
+{
+    return fileVersionStrings().join(sep);
+}
+
+QStringList AbstractVersionInfo::fileVersionStrings() const
+{
+    QStringList list;
+    foreach (const quint16 value, fileVersion()) {
+        list.append(QString::fromLatin1("%1").arg(value));
+    }
+    return list;
+}
