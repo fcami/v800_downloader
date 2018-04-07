@@ -26,7 +26,8 @@
 
 enum {
     V800 = 0,
-    M400
+    M400,
+    M460
 };
 
 class native_usb;

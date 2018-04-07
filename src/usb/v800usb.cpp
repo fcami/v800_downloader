@@ -50,10 +50,7 @@ void V800usb::start()
     int ret = -1;
     usb = new native_usb();
 
-    if(device == V800)
-        ret = usb->open_usb(0x0da4, 0x0008);
-    else if(device == M400)
-        ret = usb->open_usb(0x0da4, 0x0008);
+    ret = usb->open_usb(0x0da4, 0x0008);
 
     if(ret != -1)
     {
