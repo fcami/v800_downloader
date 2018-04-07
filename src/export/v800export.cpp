@@ -156,6 +156,12 @@ bool V800export::make_bipolar_names(QString session)
     new_file = QString(tr("%1/v2-users-0000000-training-sessions-%2-exercises-%3-samples")).arg(session_path).arg(session).arg(session);
     if(QFile::exists(file))
         QFile::rename(file, new_file);
+    else
+    {
+      file = QString(tr("%1/SAMPLES.BPB")).arg(session_path);
+      if(QFile::exists(file))
+          QFile::rename(file, new_file);
+    }
 
     file = QString(tr("%1/STATS.BPB")).arg(session_path);
     new_file = QString(tr("%1/v2-users-0000000-training-sessions-%2-exercises-%3-statistics")).arg(session_path).arg(session).arg(session);

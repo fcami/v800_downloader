@@ -229,7 +229,9 @@ void V800usb::get_all_sessions()
 
                 for(files_iter = 0; files_iter < files.length(); files_iter++)
                 {
-                    if(QString(files[files_iter]).compare(tr("SAMPLES.GZB")) == 0)
+                    QString file(files[files_iter]);
+                    if(file.compare(tr("SAMPLES.GZB")) == 0 ||
+                       file.compare(tr("SAMPLES.BPB")) == 0)
                     {
                         session_exists = true;
                         break;
