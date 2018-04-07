@@ -97,7 +97,9 @@ void V800export::export_sessions(QList<QString> sessions, unsigned char mode)
                     emit export_session_error(sessions[sessions_iter], GPX_ERROR);
             }
 
+#if 0
             QDir(QString(tr("%1/%2")).arg(default_dir).arg(multi_sessions[multi_sessions_iter])).removeRecursively();
+#endif
         }
 
         emit export_session_done(sessions_iter, sessions.length());
