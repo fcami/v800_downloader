@@ -62,6 +62,15 @@ void V800export::export_sessions(QList<QString> sessions, unsigned char mode)
             qDebug("Parser: %s", session_info.toUtf8().constData());
 
             parser.setTcxOption(polar::v2::TrainingSession::ForceTcxUTC, true);
+            parser.setTcxOption(polar::v2::TrainingSession::GarminActivityExtension, true);
+            parser.setTcxOption(polar::v2::TrainingSession::GarminCourseExtension, true);
+
+            parser.setGpxOption(polar::v2::TrainingSession::CluetrustGpxDataExtension, true);
+            parser.setGpxOption(polar::v2::TrainingSession::GarminAccelerationExtension, true);
+            parser.setGpxOption(polar::v2::TrainingSession::GarminTrackPointExtension, true);
+
+            parser.setHrmOption(polar::v2::TrainingSession::RrFiles, true);
+            parser.setHrmOption(polar::v2::TrainingSession::LapNames, true);
 
             if(!parser.parse())
                 emit export_session_error(sessions[sessions_iter], PARSE_ERROR);
