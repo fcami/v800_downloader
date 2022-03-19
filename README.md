@@ -23,6 +23,13 @@ backend is the USB backend that handles all communication to the V800 itself and
 backend is from <a href="https://www.github.com/pcolby/bipolar">Bipolar</a> and is responsible for doing the actual hardwork; the converting
 the session data into good formats like TCX, GPX and HRM.
 
+The included installer will normally configure udev for you.
+Should you wish to do that manually, either copy ./pkg/linux/99-polar.rules to /etc/udev/rules.d or create a file in that directory with
+either of the following rules:
+SUBSYSTEM=="usb", ATTRS{idVendor}=="0da4", ATTRS{idProduct}=="0008", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="0da4", ATTRS{idProduct}=="0008", MODE="0666"
+And then run "udevadm control --reload-rules". 
+
 Steps to use:<br>
 1) Connect your V800 to the computer with the USB cable<br>
 2) Run V800 Downloader; it should display a message saying that it is retrieving session data<br>
